@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+  :root {
+    --background: 0deg, 0%, 100%;
+    --foreground: 222.2 84% 4.9%; 
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+    
+    /* COLORS   */
+    --blue-50: #273468;
+    --blue-75: #1c254a;
+    --blue-100: #10152A;
+    --blue-125: #082C67;
+    --blue-150: #06070F;
+
+    --sky-50: #4285f0;
+    --sky-75: #2F79EE;
+    --sky-100: #4285F0;
+    --sky-125: #115AD0;
+    --sky-150: #073F9A;         
+
+    --teal-50: #86CED5;
+    --teal-75: #68C2CA;
+    --teal-100: #41adb7;
+    --teal-125: #3A9DA6;
+    --teal-150: #308188;
+    
+    --gray-100: #262626;
+
+    --red-300: #f87171;
+    --light-blue-300: #3b82f6;
+
+    /* FONTS */
+    --lh-value: 1.2;
+
+    --fs-display: 5.161rem;
+    --lh-display: calc(var(--fs-display) * var(--lh-value));
+
+    --fs-h1: 4.301rem;
+    --lh-h1: calc(var(--fs-h1) * var(--lh-value));
+
+    --fs-h2: 3.596rem;
+    --lh-h2: calc(var(--fs-h2) * var(--lh-value));
+
+    --fs-h3: 2.986rem;
+    --lh-h3: calc(var(--fs-h3) * var(--lh-value));
+
+    --fs-h4: 2.488rem;
+    --lh-h4: calc(var(--fs-h4) * var(--lh-value));
+
+    --fs-h5: 2.113rem;
+    --lh-h5: calc(var(--fs-h5) * var(--lh-value));
+
+    --fs-h6: 1.728rem;
+    --lh-h6: calc(var(--fs-h6) * var(--lh-value));
+
+    --fs-base-large: 1.44rem;
+    --lh-base-large: calc(var(--fs-base-large) * var(--lh-value));
+
+    --fs-base: 1.2rem;
+    --lh-base: calc(var(--fs-base) * var(--lh-value));
+
+    --fs-footer-large: 1rem;
+    --lh-footer: calc(var(--fs-footer) * var(--lh-value));
+    --fs-footer: 1rem;
+    --lh-footer: calc(var(--fs-footer) * var(--lh-value));
+
+
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    
+  }
+  /* For System Dark Theme */
+  /* @media (prefers-color-scheme: dark) {
+    :root {
+      
+    }
+  }  */
+  /* For Dark Theme Toggle */
+  /* :root[data-theme="dark"] {
+    
+  } */
+
+
+html {
+  font-size: 1rem;
+}
+
+body {
+  font-family: var(--font-poppins);
+}
+
+@layer Typography {
+  .font-outline-1 {
+    -webkit-text-stroke: 0.5px white;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+
+.swiper-button-prev, .swiper-button-next {
+  width: 35px !important;
+  height: 35px !important;
+  background: #fff;
+  border-radius: 50%;
+  color: black !important;
+}
+
+.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after ,
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+  content: 'next';
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 0
+}
+.swiper-pagination-bullet {
+  background: #e9e9e9 !important;
+  opacity: 0.5 !important
+}
+
+.swiper-pagination-bullet-active {
+  background: #e9e9e9 !important;
+  opacity: 1 !important
+}
+
+
+.header .mobileView {
+  background: var(--black3);
+}
+.header .mobileView .menuItems {
+  display: flex;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: var(--black3);
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: mobileMenu 0.3s ease forwards;
+}
+
+.header .mobileView .mobileItems .menuItem {
+  font-size: 20px;
+  width: 100%;
+  height: auto;
+  padding: 15px 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &:last-child {
+    display: none;
+  }
+}
+
+@keyframes mobileMenu {
+	0% {
+		transform: translateY(-130%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
