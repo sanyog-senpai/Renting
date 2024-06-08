@@ -13,7 +13,7 @@ const CardCollection: React.FC<CardCollectionProps> = ({ heading, subheading }) 
 
     return (
         <>
-            <Container class="sm:py-20 py-5">
+            <Container class="sm:py-20 py-5 px-0">
                 <p className={styles.sectionSubText}>{subheading}</p>
                 <h2 className={styles.sectionHeadText}>{heading}</h2>
                 <div className="card-wrapper mt-5 grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-4 md:py-2 xl:py-5">

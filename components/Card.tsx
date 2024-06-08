@@ -19,6 +19,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { ProductDetails, productDetails } from "@/utils/product.utils";
+import RentButton from "./Rent Button";
 
 
 
@@ -37,27 +38,25 @@ const Card: React.FC = () => {
 
           <Link href="/product-detail">
             <div className="swiper-container">
-                <Swiper
-                  slidesPerView={1}
-                  modules={[Navigation, Pagination, Scrollbar, A11y]}
-                  spaceBetween={50}
-                  navigation
-                  draggable={true}
-                  pagination={{ clickable: true }}
-                  onSwiper={(swiper) => console.log(swiper)}
-                  onSlideChange={() => console.log('slide change')}
-                >
-                  {productDetail.image.map((img: any, index: any) => (
-                    <SwiperSlide key={index}>
-                      <Image
-                        src={img}
-                        alt={productDetail.title}
-                        style={{width: "100%", height: "300px", objectFit:"cover", borderRadius: "12px"}}
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
+              <Swiper
+                slidesPerView={1}
+                modules={[Navigation, Pagination, Scrollbar, A11y]}
+                spaceBetween={50}
+                navigation
+                draggable={true}
+                pagination={{ clickable: true }}
+              >
+                {productDetail.image.map((img: any, index: any) => (
+                  <SwiperSlide key={index}>
+                    <Image
+                      src={img}
+                      alt={productDetail.title}
+                      style={{ width: "100%", height: "300px", objectFit: "cover", borderRadius: "12px" }}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </Link>
 
           <div className="card-body px-3 py-4 gap-2 ">
@@ -79,7 +78,10 @@ const Card: React.FC = () => {
               </p>
             </div>
 
-            <AddToCart productId={productDetail?.id} />
+            <div className="flex justify-stretch gap-2 w-full mt-4">
+              <AddToCart className="grow" productId={productDetail?.id} />
+              <RentButton className="grow" />
+            </div>
           </div>
 
         </div>

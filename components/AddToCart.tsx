@@ -15,9 +15,10 @@ interface ProductDetails {
 
 interface AddToCartProp {
    productId: number;
+   className?: string;
 }
 
-const AddToCart: React.FC<AddToCartProp> = ({ productId }) => {
+const AddToCart: React.FC<AddToCartProp> = ({ productId, className }) => {
    const [product, setProduct] = useState<ProductDetails[] | null>(null);
 
    const dispatch = useAppDispatch();
@@ -26,9 +27,10 @@ const AddToCart: React.FC<AddToCartProp> = ({ productId }) => {
       console.log("Adding to cart", productId)
       dispatch(add(productId))
    }
+
    return (
       <>
-         <button onClick={() => handleAddtoWishlist(productId)} className="btn">Add to Wishlist</button>
+         <button onClick={() => handleAddtoWishlist(productId)} className={`${className} btn`}>Add to Wishlist</button>
       </>
    )
 }
