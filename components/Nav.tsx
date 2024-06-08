@@ -57,7 +57,7 @@ const Nav = () => {
 
     const handleLogout =() =>{
         // Delete the cookie by setting its expiration date to a past date
-        // document.cookie = 'cookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'cookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
         localStorage.removeItem('isLoggedIn');
         router.push('/login');

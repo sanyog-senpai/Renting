@@ -36,7 +36,7 @@ const Login = () => {
                     <Formik
                         initialValues={{ email: '', password: '' }}
                         validationSchema={Yup.object({
-                            email: Yup.string().email('Invalid email address')
+                            email: Yup.string().email('Invalid email address').lowercase()
                                 .required('Required'),
                             password: Yup.string().min(8, 'Must be 8 words or more').required('Required'),
                         })}
@@ -51,7 +51,7 @@ const Login = () => {
                                     body: JSON.stringify(values)
                                 })
                                 const data = await res.json();
-                                console.log(data);
+
                                 if (data.isLoggedIn) {
                                     setSuccess(data.message)
                                     resetForm()
@@ -60,6 +60,7 @@ const Login = () => {
                                 } else {
                                     setError(data.message)
                                 }
+                                
                             } catch (error) {
                                 console.log(error)
                             }

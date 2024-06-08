@@ -29,7 +29,7 @@ const Register = () => {
                     validationSchema={
                         Yup.object({
                             fullName: Yup.string().matches(/^[a-z A-Z]+$/, "Must be only alphabets").max(50, 'Name too long, use Nickname').required('Name is required').min(2, 'Name too short, include last name too'),
-                            email: Yup.string().email('Invalid email address').required('Required'),
+                            email: Yup.string().email('Invalid email address').lowercase().required('Required'),
                             password: Yup.string().min(8, 'Must be 8 words or more').required('Required'),
                         })}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -42,15 +42,18 @@ const Register = () => {
                                 body: JSON.stringify(values)
                             })
 
+                            const data = await res.json()
+                            console.log(data)
+
                             if (res.ok) {
-                                setSuccess("User registered successfully")
+                                setSuccess(data.message)
                                 resetForm()
                                 setTimeout(() => {
-                                    router.push('/login'); // Redirect to login page after 2 seconds
+                                    router.push('/login');
                                 }, 2000);
                             } else {
                                 // console.log("Res",res)
-                                setError("User Registration failed")
+                                setError(data.message)
                             }
 
                         } catch (error) {
