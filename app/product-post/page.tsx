@@ -14,7 +14,7 @@ const Login = () => {
    return (<>
 
       <Container className='flex items-center justify-center h-screen'>
-         <div className="card shrink-0 w-full max-w-[25rem] shadow-2xl bg-base-100">
+         <div className="card shrink-0 w-full max-w-[30rem] shadow-2xl bg-base-100">
             <Formik
                initialValues={{ image: "", title: "", price: "", description: "", condition: "", status: "" }}
                validationSchema={
@@ -102,8 +102,11 @@ const Login = () => {
 
 
                         <div>
-                           <span className="label-text ">Image</span>
-                           <input type="file" className="file-input w-full max-w-xs" accept='image/*' multiple placeholder='Upload Image' />
+                           <span className="label-text mt-2">Image</span>
+                           <div>
+
+                              <input type="file" className="file-input w-full h-10 bg-slate-300" accept='image/*' multiple placeholder='Upload Image' style={{borderRadius: "5rem"}}/>
+                           </div>
                         </div>
 
 

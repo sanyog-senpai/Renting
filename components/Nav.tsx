@@ -5,11 +5,12 @@ import { useEffect, useState } from 'react'
 import Link from "next/link"
 import Image from 'next/image'
 import avatarIcon from './../public/assets/image/user.jpg'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { NavStyles, ButtonStyles } from '@/app/styles'
 import { BiMenuAltRight } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { useAppSelector } from '@/libs/hook'
+import { constants } from 'buffer'
 
 
 const Nav = () => {
@@ -46,21 +47,32 @@ const Nav = () => {
         window.scrollTo(0, 0);
     }, [pathname])
 
-    const userLogin = false;
+    const stats = localStorage.getItem("isLoggedIn")
 
-    const items = useAppSelector(state=> state.wishlist.items)
+    let userLogin = stats === "true" ? true : false
+
+    const items = useAppSelector(state => state.wishlist.items)
+
+    const router = useRouter()
+
+    const handleLogout =() =>{
+        // Delete the cookie by setting its expiration date to a past date
+        // document.cookie = 'cookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+        localStorage.removeItem('isLoggedIn');
+        router.push('/login');
+    }
 
     return (
         <header className={`${NavStyles.header} ${mobileMenu ? "mobileMenu" : ""} ${show}`}>
 
-            <nav className="container flex justify-between items-center ">
+            <nav className="container relative flex justify-between items-center ">
                 <Link href="/">
                     <h1 className="font-bold text-xl text-white">Rent Commerce</h1>
                 </Link>
 
                 <ul className="text-white flex items-center gap-6 max-md:hidden">
                     <li><Link href="/">Home</Link></li>
-                    <li><Link href="/">About </Link></li>
                     <li><Link href="/">Contact Us</Link></li>
 
                     {userLogin ? (
@@ -78,7 +90,7 @@ const Nav = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-blue-100 shadow">
+                                    <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-slate-200 shadow text-slate-900">
                                         <div className="card-body p-4">
                                             <Link href="/cart">
                                                 View My Cart
@@ -94,18 +106,21 @@ const Nav = () => {
                                             <Image src={avatarIcon} width={100} height={100} alt="App Logo" />
                                         </div>
                                     </div>
-                                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] py-4 shadow bg-blue-100 rounded-box w-48">
+                                    <ul tabIndex={1} className="menu menu-sm dropdown-content dropdown-start mt-3 z-[1] py-4 shadow bg-slate-200 rounded-box w-48 text-slate-900">
                                         <li>
                                             <Link href="/profile" className="justify-between">
                                                 My Profile
-                                                <span className="badge badge-success badge-sm">1+</span>
                                             </Link>
                                         </li>
                                         <li>
                                             <Link href="/dashboard" className="justify-between">
                                                 Dashboard
-                                                <span className="badge badge-success badge-sm">1+</span>
                                             </Link>
+                                        </li>
+                                        <li>
+                                            <button onClick={handleLogout}>
+                                                Log out
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import wishListReducer from "./features/wishlist/wishListSlice"
+import errorReducer from "./features/error/errorSlice"
 
 export const makeStore = () => {
    return configureStore({
       reducer: {
-         wishlist: wishListReducer
+         wishlist: wishListReducer,
+         error: errorReducer,
       }
    })
 }

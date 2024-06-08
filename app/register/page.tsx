@@ -5,39 +5,59 @@ import { Formik } from 'formik';
 import Link from "next/link";
 import * as Yup from 'yup';
 import { ButtonStyles, InputStyles } from '../styles';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Toast from '@/components/Toast';
 
-
-interface FormikValidation {
-    fullName: string,
-    email: string,
-    password: string,
-}
 
 const Register = () => {
-
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-
-    console.log(name)
+    const router = useRouter();
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     return (<>
         <Container className='flex items-center justify-center h-screen'>
+            {error && (
+                <Toast message={error} type='error' />
+            )}
+            {success && (
+                <Toast message={success} type='success' />
+            )}
             <div className="card shrink-0 w-full max-w-[25rem] shadow-2xl bg-base-100">
                 <Formik
-                    initialValues={{ fullName: '', email: '', password: ""}}
+                    initialValues={{ fullName: '', email: '', password: "" }}
                     validationSchema={
                         Yup.object({
                             fullName: Yup.string().matches(/^[a-z A-Z]+$/, "Must be only alphabets").max(50, 'Name too long, use Nickname').required('Name is required').min(2, 'Name too short, include last name too'),
                             email: Yup.string().email('Invalid email address').required('Required'),
                             password: Yup.string().min(8, 'Must be 8 words or more').required('Required'),
                         })}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
+                    onSubmit={async (values, { setSubmitting, resetForm }) => {
+                        try {
+                            const res = await fetch("api/user/register", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(values)
+                            })
+
+                            if (res.ok) {
+                                setSuccess("User registered successfully")
+                                resetForm()
+                                setTimeout(() => {
+                                    router.push('/login'); // Redirect to login page after 2 seconds
+                                }, 2000);
+                            } else {
+                                // console.log("Res",res)
+                                setError("User Registration failed")
+                            }
+
+                        } catch (error) {
+                            console.log("Error during registration", error);
+                        } finally {
                             setSubmitting(false);
-                        }, 400);
+                        }
                     }}
                 >
                     {formik => (<>
@@ -49,7 +69,7 @@ const Register = () => {
                                     <span className="label-text">Full Name</span>
                                     <input id="fullName"
                                         placeholder="Full Name"
-                                        {...formik.getFieldProps('fullName')} 
+                                        {...formik.getFieldProps('fullName')}
                                         className={`${InputStyles.input} `}
                                         required />
                                     {formik.touched.fullName && formik.errors.fullName ? (
@@ -72,7 +92,7 @@ const Register = () => {
                                 <div>
                                     <span className="label-text ">Password</span>
                                     <input id="password" {...formik.getFieldProps('password')} type="password" placeholder="Enter password" className={`${InputStyles.input} w-full`}
-                                    required />
+                                        required />
                                     {formik.touched.password && formik.errors.password ? (
                                         <div className={`${InputStyles.errorMessage}`} >{formik.errors.password}</div>
                                     ) : null}
