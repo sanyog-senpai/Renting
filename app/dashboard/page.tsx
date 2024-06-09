@@ -1,72 +1,72 @@
-import Image from 'next/image'
-import React from 'react'
+"use client"
 
-import product from "@/public/assets/image/products/shoe.jpg"
-import Container from '@/components/Container'
+import Image from 'next/image';
+import Container from '@/components/Container';
+import product from "@/public/assets/image/products/shoe.jpg";
+import Link from 'next/link';
+import { styles, TableStyles } from '../styles';
+import AuthGuard from '@/components/AuthGuard';
 
 const Dashboard = () => {
+  const access = localStorage.getItem("isLoggedIn");
+
   return (
-    
     <Container className='h-screen pt-20'>
-      <div className="overflow-x-auto">
-        <h1 className='text-3xl'>Your Product Listing</h1>
-        <table className="table w-full mt-5">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>
-                SNo
-              </th>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Condition</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            <tr>
-              <th>
-                <label>
-                  1
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <Image src={product} width={50} height={50} alt="Avatar Tailwind CSS Component" />
+      <AuthGuard>
+        <div className="overflow-x-auto rounded-lg">
+          <h2 className={styles.sectionHeadText}>Pending Post from Renter</h2>
+          <table className="w-full mt-5 border-collapse border-2 border-gray-300 rounded-lg">
+            {/* head */}
+            <thead className="text-sm text-slate-900">
+              <tr>
+                <th className={`${TableStyles.borderStyle} p-3 text-center`}>SNo</th>
+                <th className={`${TableStyles.borderStyle} p-3 text-center`}>Product</th>
+                <th className={`${TableStyles.borderStyle} p-3 text-center`}>Price</th>
+                <th className={`${TableStyles.borderStyle} p-3 text-center`}>Status</th>
+                <th className={`${TableStyles.borderStyle} p-3 text-center`}>Condition</th>
+                <th className={`${TableStyles.borderStyle} p-3 text-center`}>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              <tr className="bg-white hover:bg-gray-50">
+                <td className={`${TableStyles.borderStyle} p-3 text-center`}>1</td>
+                <td className={`${TableStyles.borderStyle} p-3 border-gray-300`}>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <Image src={product} width={50} height={50} alt="Product Image" />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-bold">Shoes</p>
+                      <Link href='/'>
+                        <p className="font-light font-xs leading-none underline">View Details</p>
+                      </Link>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-bold">Shoes</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                $50
-                <br />
-              </td>
-              <td>
-
-                <button className="badge badge-sm text-white bg-green-500">Rent</button>
-              </td>
-              <td>
-
-                <button className="badge badge-sm text-white bg-orange-500">new</button>
-              </td>
-              <th className=''>
-                <button className="btn btn-ghost btn-xs bg-green-300 me-2">approve</button>
-                <button className="btn btn-ghost btn-xs bg-blue-300 me-2">edit</button>
-                <button className="btn btn-ghost btn-xs bg-red-300">delete</button>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                </td>
+                <td className={`${TableStyles.borderStyle} p-3 text-center`}>
+                  $50
+                </td>
+                <td className={`${TableStyles.borderStyle} p-3 text-center`}>
+                  <span className="badge badge-sm text-white bg-green-500">Rent</span>
+                </td>
+                <td className={`${TableStyles.borderStyle} p-3 text-center`}>
+                  <span className="badge badge-sm text-white bg-orange-500">New</span>
+                </td>
+                <td className={`${TableStyles.borderStyle} p-3 text-center`}>
+                  <button className="btn btn-ghost btn-xs bg-green-300 hover:bg-green-500 hover:text-white me-2 transition-all">Approve</button>
+                  <button className="btn btn-ghost btn-xs bg-blue-300 hover:bg-blue-500 me-2 hover:text-white">Edit</button>
+                  <button className="btn btn-ghost btn-xs bg-red-300 hover:bg-red-500 hover:text-white">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </AuthGuard>
     </Container>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

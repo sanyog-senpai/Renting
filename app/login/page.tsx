@@ -21,6 +21,7 @@ interface SignInResponse {
 const Login = () => {
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false)
     const router = useRouter();
 
     return (
@@ -41,6 +42,7 @@ const Login = () => {
                             password: Yup.string().min(8, 'Must be 8 words or more').required('Required'),
                         })}
                         onSubmit={async (values, { setSubmitting, resetForm }) => {
+                            setLoading(true)
 
                             try {
                                 const res = await fetch("api/user/login", {
@@ -63,6 +65,8 @@ const Login = () => {
                                 
                             } catch (error) {
                                 console.log(error)
+                            } finally {
+                                setLoading(false)
                             }
 
                         }}
@@ -88,7 +92,8 @@ const Login = () => {
                                         ) : null}
                                     </div>
 
-                                    <button type="submit" className={`${ButtonStyles.primaryButton} mt-3`} >Login</button>
+                                    <button type="submit" className={`mt-3 w-full mx-auto ${loading ? `${ButtonStyles.primaryButton} " bg-slate-400 hover:bg-slate-600 text-slate-900"` : ButtonStyles.primaryButton}`} disabled={loading}
+                                >{loading ? "Logging In..." : "Login"}</button>
 
                                     <p className="text-[12px] text-center mt-1">Don&apos;t have an account?
                                         <Link href="/register" className="text-blue-100 font-bold"> Create an account</Link></p>

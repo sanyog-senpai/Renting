@@ -2,7 +2,6 @@ import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import { Poppins } from "@next/font/google";
 import type { Metadata } from "next";
-import { AuthProvider } from "./AuthProvider";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 const poppins = Poppins({
@@ -29,9 +28,7 @@ export default function RootLayout({ children }: Props) {
           <StoreProvider>
             <Nav />
             <main className="relative">
-              <AuthProvider>
                 {children}
-              </AuthProvider>
             </main>
             <Footer />
           </StoreProvider>

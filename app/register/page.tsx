@@ -14,6 +14,7 @@ const Register = () => {
     const router = useRouter();
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false)
 
     return (<>
         <Container className='flex items-center justify-center h-screen'>
@@ -33,6 +34,7 @@ const Register = () => {
                             password: Yup.string().min(8, 'Must be 8 words or more').required('Required'),
                         })}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
+                        setLoading(true)
                         try {
                             const res = await fetch("api/user/register", {
                                 method: "POST",
@@ -60,6 +62,7 @@ const Register = () => {
                             console.log("Error during registration", error);
                         } finally {
                             setSubmitting(false);
+                            setLoading(false)
                         }
                     }}
                 >
@@ -101,7 +104,8 @@ const Register = () => {
                                     ) : null}
                                 </div>
 
-                                <button type="submit" className={`${ButtonStyles.primaryButton} mt-3 w-full mx-auto`} >Register</button>
+                                <button type="submit" className={`mt-3 w-full mx-auto ${loading ? `${ButtonStyles.primaryButton} " bg-slate-400 hover:bg-slate-600 text-slate-900"` : ButtonStyles.primaryButton}`} disabled={loading}
+                                >{loading ? "Registering..." : "Register"}</button>
 
                                 <p className="text-[12px] text-center mt-1">Already have an account? <Link href="/login" className="text-blue-100 font-bold">Login</Link></p>
                             </div>

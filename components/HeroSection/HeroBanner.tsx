@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import image from "./../../public/assets/image/banner.png"
+import image from "./../../public/assets/image/banner 1.png"
 import Container from './../Container';
 import { ButtonStyles, styles } from '@/app/styles';
 import Link from 'next/link';

@@ -78,11 +78,11 @@ const ProductDetail = () => {
                      <p className="text-gray-700 leading-relaxed mb-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod unde iure magni iste aut? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, id voluptatum eligendi vitae sed culpa quis? A, fugiat excepturi officia dignissimos natus minus voluptatibus alias.</p>
                      <div className="flex items-center space-x-4 mb-6">
                         <span className="text-lg font-medium text-gray-900">Status:</span>
-                        <span className="badge badge-accent text-white bg-green-500 px-3 py-1 rounded-full">Rent</span>
+                        <span className={` ${ true ? "bg-green-500" : "bg-yellow-500 " } badge text-white  px-3 py-1 rounded-full`}>Rent</span>
                      </div>
                      <div className="flex items-center space-x-4 mb-8">
                         <span className="text-lg font-medium text-gray-900">Condition:</span>
-                        <span className="badge badge-accent text-white bg-yellow-500 px-3 py-1 rounded-full">Old</span>
+                        <span className={` ${ false ? "bg-green-500" : "bg-yellow-500 " } badge text-white  px-3 py-1 rounded-full`}>Old</span>
                      </div>
                      <RentButton />
                   </div>

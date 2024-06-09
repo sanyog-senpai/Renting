@@ -33,7 +33,6 @@ export default async function handler(
             fullName,
             email,
             password: hashedPassword,
-            role: 'renter'
          });
 
          await newUser.save();

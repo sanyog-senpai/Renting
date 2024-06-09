@@ -29,7 +29,11 @@ const ButtonStyles = {
 const InputStyles = {
     errorMessage: "text-red-500 text-[12px]",
 
-    input: "input input-bordered grow w-full focus:outline-1 placeholder:text-neutral-400 placeholder:text-sm text-sm p-2 h-8 rounded-lg font-sm focus:outline-0 focus:border-sky-600"
+    input: "input input-bordered grow w-full focus:outline-1 placeholder:text-neutral-500 placeholder:text-sm text-sm p-1 px-2 h-[2.5rem] rounded-lg font-sm focus:outline-0 focus:border-sky-600"
 }
 
-export { styles, NavStyles, ButtonStyles, InputStyles };
+const TableStyles = {
+    borderStyle: "p-3 border-2 border-gray-300 text-center",
+}
+
+export { styles, NavStyles, ButtonStyles, InputStyles, TableStyles };

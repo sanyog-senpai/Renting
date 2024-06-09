@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 type ResponseData = {
    isLoggedIn: boolean;
    message: string;
+   fullName?: string;
 }
 
 export default async function handler(
@@ -38,8 +39,8 @@ export default async function handler(
          return res.setHeader('Set-Cookie', `email=${email}; Path=/; HttpOnly`).status(200).json({
             isLoggedIn: true,
             message: 'User login successful!',
+            fullName: existingUser.fullName,
          });
-
 
       } catch (error) {
          return res.status(500).json({
