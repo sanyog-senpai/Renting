@@ -1,0 +1,14 @@
+// m Second hand products rental web page
+
+Second hand products rental web page with admin panel
+Detail of the ads 
+As a rentee I should be able to rent the ads Request ===> 
+Owner approves the rent request  
+On home page status ====> Not Available/Rented
+
+=> admin
+=> Owner/Renter 
+   -> Category basis ads entrya
+=> Rentee 
+
+Admin approve entry ads 

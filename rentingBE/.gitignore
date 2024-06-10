@@ -1,0 +1,8 @@
+# Node Modules
+node_modules
+
+# Environment Variables
+.env
+
+# TODO: Steps followed during express 
+Backend.txt
