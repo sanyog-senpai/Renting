@@ -26,7 +26,7 @@ export const isRenter = async (req, res, next) => {
 
       // User role must be seller 
       if (user.role !== "renter") {
-         return res.status(401).send({ message: "You must be seller to create product" })
+         return res.status(401).send({ message: "You must be renter to create product" })
       }
 
       // add user to req
