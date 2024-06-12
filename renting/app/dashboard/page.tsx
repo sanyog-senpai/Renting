@@ -9,12 +9,12 @@ import AuthGuard from '@/components/AuthGuard';
 import { useEffect, useState } from 'react';
 
 const Dashboard = () => {
-  const [role, setRole] = useState("");
+  // const [role, setRole] = useState("");
 
-  useEffect(() => {
-    const roleFromStorage = localStorage.getItem("role") || "";
-    setRole(roleFromStorage);
-  }, []);
+  // useEffect(() => {
+  //   const roleFromStorage = localStorage.getItem("role") || "";
+  //   setRole(roleFromStorage);
+  // }, []);
 
   const adminDashboard = () => (
     <div className="overflow-x-auto rounded-lg">
@@ -117,9 +117,9 @@ const Dashboard = () => {
 
   return (
     <Container className='h-screen pt-20'>
-      <AuthGuard>
-        {role === "admin" ? adminDashboard() : renterDashboard()}
-      </AuthGuard>
+      {/* <AuthGuard> */}
+        {false ? adminDashboard() : renterDashboard()}
+      {/* </AuthGuard> */}
     </Container>
   );
 };

@@ -9,7 +9,6 @@ import { usePathname, useRouter } from 'next/navigation'
 import { NavStyles, ButtonStyles } from '@/app/styles'
 import { BiMenuAltRight } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { useAppSelector } from '@/libs/hook'
 import { constants } from 'buffer'
 
 
@@ -47,21 +46,27 @@ const Nav = () => {
         window.scrollTo(0, 0);
     }, [pathname])
 
-    const stats = localStorage.getItem("isLoggedIn")
+    // Check if running in a browser environment
+    const isBrowser = typeof window !== "undefined";
 
-    let userLogin = stats === "true" ? true : false
+    // const stats = localStorage.getItem("isLoggedIn")
+    const stats = isBrowser ? localStorage.getItem("isLoggedIn") : null;
 
-    const items = useAppSelector(state => state.wishlist.items)
+    let userLogin = stats === "true";
 
     const router = useRouter()
 
-    const handleLogout =() =>{
+    const handleLogout = () => {
         // Delete the cookie by setting its expiration date to a past date
         document.cookie = 'cookieName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('role');
+        localStorage.removeItem('name');
         router.push('/login');
     }
+
+    const dataName = localStorage.getItem('username');
+    const nickname = dataName ? dataName.split(' ').filter((_, i) => i !== 1).join(' ') : '';
 
     return (
         <header className={`${NavStyles.header} ${mobileMenu ? "mobileMenu" : ""} ${show}`}>
@@ -80,27 +85,6 @@ const Nav = () => {
                             <li><Link href="/product-post">Post Product</Link></li>
                             <li>
                                 <div className="dropdown dropdown-end">
-                                    <div tabIndex={0} role="button" className="btn btn-sm btn-ghost btn-circle">
-                                        <div className="indicator">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                            </svg>
-                                            <span className="badge badge-sm indicator-item">
-                                                {items.length}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-slate-200 shadow text-slate-900">
-                                        <div className="card-body p-4">
-                                            <Link href="/cart">
-                                                View My Cart
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="dropdown dropdown-end">
                                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                         <div className="w-9 rounded-full">
                                             <Image src={avatarIcon} width={100} height={100} alt="App Logo" />
@@ -109,7 +93,7 @@ const Nav = () => {
                                     <ul tabIndex={1} className="menu menu-sm dropdown-content dropdown-start mt-3 z-[1] py-4 shadow bg-slate-200 rounded-box w-48 text-slate-900">
                                         <li>
                                             <Link href="/profile" className="justify-between">
-                                                My Profile
+                                                {nickname}&apos;s Profile
                                             </Link>
                                         </li>
                                         <li>

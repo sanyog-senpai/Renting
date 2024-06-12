@@ -1,7 +1,5 @@
 "use client"
-import { add } from '@/libs/features/wishlist/wishListSlice';
-import { useAppDispatch } from '@/libs/hook';
-import React, { useState } from 'react'
+import React from 'react';
 
 interface ProductDetails {
    id: number;
@@ -19,13 +17,9 @@ interface AddToCartProp {
 }
 
 const AddToCart: React.FC<AddToCartProp> = ({ productId, className }) => {
-   const [product, setProduct] = useState<ProductDetails[] | null>(null);
-
-   const dispatch = useAppDispatch();
 
    const handleAddtoWishlist = (productId: number) => {
       console.log("Adding to cart", productId)
-      dispatch(add(productId))
    }
 
    return (

@@ -1,16 +1,13 @@
 "use client"
 
 import Container from '@/components/Container';
+import Toast from '@/components/Toast';
 import { Formik } from 'formik';
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import { ButtonStyles, InputStyles } from '../styles';
-import { signIn } from 'next-auth/react';
-import { setDefaultResultOrder } from 'dns';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Toast from '@/components/Toast';
-import { RiCollageFill } from 'react-icons/ri';
 
 interface SignInResponse {
     error?: string;
@@ -44,29 +41,30 @@ const Login = () => {
                         })}
                         onSubmit={async (values, { setSubmitting, resetForm }) => {
                             setLoading(true)
-
                             try {
-                                const res = await fetch("api/user/login", {
+                                const res = await fetch("http://localhost:3001/user/login", {
                                     method: "POST",
                                     headers: {
                                         "Content-Type": "application/json",
                                     },
+                                    credentials: 'include',
                                     body: JSON.stringify(values)
                                 })
-                                const data = await res.json();
-                                console.log(data)
 
-                                if (data.isLoggedIn) {
+                                const data = await res.json();
+                                console.log(data.message)
+
+                                if (data.message === 'Success') {
                                     setSuccess(data.message)
                                     resetForm()
                                     localStorage.setItem('isLoggedIn', "true");
-                                    localStorage.setItem("role", data.role);
-
+                                    localStorage.setItem("role", data.response.role);
+                                    localStorage.setItem("username", data.response.fullName);
                                     router.push('/')
                                 } else {
                                     setError(data.message)
                                 }
-                                
+
                             } catch (error) {
                                 console.log(error)
                             } finally {
@@ -97,7 +95,7 @@ const Login = () => {
                                     </div>
 
                                     <button type="submit" className={`mt-3 w-full mx-auto ${loading ? `${ButtonStyles.primaryButton} " bg-slate-400 hover:bg-slate-600 text-slate-900"` : ButtonStyles.primaryButton}`} disabled={loading}
-                                >{loading ? "Logging In..." : "Login"}</button>
+                                    >{loading ? "Logging In..." : "Login"}</button>
 
                                     <p className="text-[12px] text-center mt-1">Don&apos;t have an account?
                                         <Link href="/register" className="text-blue-100 font-bold"> Create an account</Link></p>

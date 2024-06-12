@@ -65,11 +65,17 @@ export const LoginUser = async (req, res) => {
    const accessToken = jwt.sign({email: user.email}, jwtSecretKey, {
       expiresIn: "1d"
    })
-   console.log(accessToken)
+   // console.log(accessToken)
 
    // removing password to send in response
    user.password = undefined;
+   // console.log(typeof user)
+
+   // making the user to object and passing isLoggedIn key
+   const userObject = user.toObject();
+   userObject.isLoggedIn = true;
+   // console.log(userObject)
 
    // Send Final Response
-   return res.status(404).send({ user, accessToken })
+   return res.status(404).json({ message: "Success" , response:userObject,accessToken })
 }

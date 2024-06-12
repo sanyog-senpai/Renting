@@ -35,12 +35,14 @@ const Register = () => {
                         })}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
                         setLoading(true)
+
                         try {
-                            const res = await fetch("api/user/register", {
+                            const res = await fetch("http://localhost:3001/user/register", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
                                 },
+                                    credentials: 'include',
                                 body: JSON.stringify(values)
                             })
 

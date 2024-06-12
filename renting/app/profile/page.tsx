@@ -13,7 +13,7 @@ const Profile = () => {
   const access = localStorage.getItem("isLoggedIn");
   return (
     <>
-    <AuthGuard>
+    {/* <AuthGuard> */}
       <div className=" h-screen flex items-center justify-center ">
         <div className=" max-w-sm mx-auto flex flex-col items-center my-4 p-8 bg-white shadow-md rounded-lg">
           <div className="avatar">
@@ -28,7 +28,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </AuthGuard>
+    {/* </AuthGuard> */}
     
     </>
   );

@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
    fullName: {
       type: String,
-      maxlength: [100, 'Full name must be less than 100 characters'],
+      maxlength: [100, 'Name too long, use nickname'],
       minlength: [2, 'Full name must be more than 2 characters'],
-      required: [true, 'Full name is required']
+      required: [true, 'Full Name is required']
    },
    email: {
       type: String,
@@ -20,8 +20,10 @@ const userSchema = new mongoose.Schema({
    },
    password: {
       type: String,
+      match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/],
       minlength: [8, 'Password must be at least 8 characters long'],
       required: [true, "Password is a required field"],
+      trim: true,
    },
    role: {
       type: String,
